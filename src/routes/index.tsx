@@ -119,11 +119,11 @@ export default component$(() => {
           .map((char) => {
             // @ts-ignore
             return (
-              layout.thai[localState.layout.thai].shift.concat(
-                layout.thai[localState.layout.thai].normal
+              layout.thai[localState.layout.thai as keyof typeof layout.thai].shift.concat(
+                layout.thai[localState.layout.thai as keyof typeof layout.thai].normal
               )[
-                layout.eng[localState.layout.eng].shift
-                  .concat(layout.eng[localState.layout.eng].normal)
+                layout.eng[localState.layout.eng as keyof typeof layout.eng].shift
+                  .concat(layout.eng[localState.layout.eng as keyof typeof layout.eng].normal)
                   .indexOf(char)
               ] || char
             );
@@ -137,11 +137,11 @@ export default component$(() => {
           .map((char) => {
             // @ts-ignore
             return (
-              layout.eng[localState.layout.eng].shift.concat(
-                layout.eng[localState.layout.eng].normal
+              layout.eng[localState.layout.eng as keyof typeof layout.eng].shift.concat(
+                layout.eng[localState.layout.eng as keyof typeof layout.eng].normal
               )[
-                layout.thai[localState.layout.thai].shift
-                  .concat(layout.thai[localState.layout.thai].normal)
+                layout.thai[localState.layout.thai as keyof typeof layout.thai].shift
+                  .concat(layout.thai[localState.layout.thai as keyof typeof layout.thai].normal)
                   .indexOf(char)
               ] || char
             );
@@ -155,11 +155,11 @@ export default component$(() => {
           .map((char) => {
             // @ts-ignore
             return (
-              layout.thai[localState.layout.thai].shift[
-                layout.thai[localState.layout.thai].normal.indexOf(char)
+              layout.thai[localState.layout.thai as keyof typeof layout.thai].shift[
+                layout.thai[localState.layout.thai as keyof typeof layout.thai].normal.indexOf(char)
               ] ||
-              layout.thai[localState.layout.thai].normal[
-                layout.thai[localState.layout.thai].shift.indexOf(char)
+              layout.thai[localState.layout.thai as keyof typeof layout.thai].normal[
+                layout.thai[localState.layout.thai as keyof typeof layout.thai].shift.indexOf(char)
               ] ||
               char
             );

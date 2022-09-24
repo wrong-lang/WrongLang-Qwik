@@ -35,5 +35,8 @@
     "typescript": "4.8.3",
     "vite": "3.1.1",
     "vite-tsconfig-paths": "3.5.0"
+  },
+  "dependencies": {
+    "@netlify/vite-plugin-netlify-edge": "^1.1.0"
   }
 }
