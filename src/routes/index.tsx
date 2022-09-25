@@ -101,8 +101,7 @@ export default component$(() => {
   useWatch$(
     ({ track }) => {
       track(store, "text");
-      track(localState.layout, "thai");
-      track(localState.layout, "eng");
+      track(localState, "layout");
       track(localState, "mode");
       track(localState, "darkTheme");
       track(localState, "lang");
