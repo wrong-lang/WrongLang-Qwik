@@ -108,9 +108,9 @@ export default component$(() => {
       track(localState, "lang");
 
       if (!isServer) {
-        console.log("dhi");
-        localStorage["wrong-lang-settings"] = JSON.stringify(localState);
-        console.log(localStorage["wrong-lang-settings"]);
+        if (localStorage) {
+          localStorage["wrong-lang-settings"] = JSON.stringify(localState);
+        }
       }
 
       if (localState.mode === "To Thai") {
