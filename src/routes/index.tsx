@@ -1,13 +1,10 @@
 import {
   component$,
-  useCleanup$,
-  useCleanupQrl,
   useClientEffect$,
   useStore,
   useWatch$,
 } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import { Link } from "@builder.io/qwik-city";
 import { isServer } from "@builder.io/qwik/build";
 import { Modal } from "~/components/modal";
 
@@ -15,7 +12,7 @@ export default component$(() => {
   // Local Storage store
   let localState = useStore(
     {
-      mode: "To Thai",
+      mode: "Swap language",
       layout: {
         thai: "Kedmanee",
         eng: "Qwerty",
@@ -38,8 +35,7 @@ export default component$(() => {
   };
 
   const thMode = {
-    "To Thai": "เป็นไทย",
-    "To English": "เป็นอังกฤษ",
+    "Swap language": "สลับภาษา",
     Unshift: "ยกเลิกตรึงอักษร",
   };
 
@@ -97,8 +93,9 @@ export default component$(() => {
       },
     },
   };
+
   // Available modes
-  const modes = ["To Thai", "To English", "Unshift"];
+  const modes = ["Swap language", "Unshift"];
 
   useWatch$(
     ({ track }) => {
@@ -114,11 +111,10 @@ export default component$(() => {
         }
       }
 
-      if (localState.mode === "To Thai") {
+      if (localState.mode === "Swap language") {
         store.convertedText = store.text
           .split("")
           .map((char) => {
-            // @ts-ignore
             return (
               layout.thai[localState.layout.thai as keyof typeof layout.thai].shift.concat(
                 layout.thai[localState.layout.thai as keyof typeof layout.thai].normal
@@ -126,18 +122,7 @@ export default component$(() => {
                 layout.eng[localState.layout.eng as keyof typeof layout.eng].shift
                   .concat(layout.eng[localState.layout.eng as keyof typeof layout.eng].normal)
                   .indexOf(char)
-              ] || char
-            );
-          })
-          .join("");
-      }
-
-      if (localState.mode === "To English") {
-        store.convertedText = store.text
-          .split("")
-          .map((char) => {
-            // @ts-ignore
-            return (
+              ] ||
               layout.eng[localState.layout.eng as keyof typeof layout.eng].shift.concat(
                 layout.eng[localState.layout.eng as keyof typeof layout.eng].normal
               )[
@@ -154,7 +139,6 @@ export default component$(() => {
         store.convertedText = store.text
           .split("")
           .map((char) => {
-            // @ts-ignore
             return (
               layout.thai[localState.layout.thai as keyof typeof layout.thai].shift[
                 layout.thai[localState.layout.thai as keyof typeof layout.thai].normal.indexOf(char)
@@ -162,7 +146,8 @@ export default component$(() => {
               layout.thai[localState.layout.thai as keyof typeof layout.thai].normal[
                 layout.thai[localState.layout.thai as keyof typeof layout.thai].shift.indexOf(char)
               ] ||
-              char
+                /[A-Z]/.test(char) ? char.toLowerCase() : char.toUpperCase()
+              || char
             );
           })
           .join("");
@@ -181,7 +166,7 @@ export default component$(() => {
           )}
 
           {/* Web Title */}
-          <div className="flex flex-col gap-2">
+          <div className="header-container">
             <div className="title-container">
               <img src="/web.png" alt="W" className="title-img" />
               <span className="title-text">rongLang</span>
@@ -192,7 +177,10 @@ export default component$(() => {
           {/* Top Bar Elements */}
           <div>
             <div className="absolute top-2 right-2">
-              <button onClick$={() => (localState.modal = true)}>
+              <button
+                onClick$={() => (localState.modal = true)}
+                class="emotes"
+              >
                 🤔คืออะไร
               </button>
             </div>
@@ -202,6 +190,7 @@ export default component$(() => {
                   onClick$={() =>
                     (localState.darkTheme = !localState.darkTheme)
                   }
+                  className="emotes"
                 >
                   {localState.darkTheme ? "😎" : "🌙"}
                 </button>
@@ -211,9 +200,9 @@ export default component$(() => {
                       ? (localState.lang = "th")
                       : (localState.lang = "en")
                   }
-                  class="emotes"
+                  className="emotes"
                 >
-                  {localState.lang === "en" ? "🇺🇸 (English)" : "🇹🇭 (ภาษาไทย)"}
+                  {localState.lang === "th" ? "🇺🇸" : "🇹🇭"}
                 </button>
               </div>
             </div>
@@ -238,27 +227,35 @@ export default component$(() => {
 
           {/* Input Box */}
           <div className="input-container">
+            {/* Input Box */}
             <input
               type="text"
               className="input-box"
-              placeholder={"ใส่ข้อความที่ต้องการที่นี่..."}
+              placeholder={localState.lang === "th" ? "ใส่ข้อความที่ต้องการที่นี่..." : "Type your text here..."}
               value={store.text}
               onInput$={(e) =>
                 (store.text = (e.target as HTMLInputElement)!.value)
               }
             />
+            {/* Converted Box */}
             <input
               type="text"
               className="input-box"
-              placeholder={"ข้อความที่แปลงแล้วจะปรากฎ..."}
+              placeholder={localState.lang === "th" ? "ข้อความที่แปลงแล้วจะปรากฎ..." : "Converted text will appear here..."}
               value={store.convertedText}
             />
+            {/* Copy Button */}
             <input type="button"
                    className="w-full p-2 bg-transparent rounded-lg text-blue-500 border-2 border-blue-500 active:bg-blue-500 active:text-white duration-200"
-                   value="คัดลอก" />
+                   value={localState.lang === "th" ? "คัดลอก" : "Copy"}
+                   onClick$={() => {
+                     navigator.clipboard.writeText(store.convertedText);
+                     alert(localState.lang === "th" ? "คัดลอกเรียบร้อยแล้ว!" : "Copied!");
+                   }}
+            />
           </div>
 
-          {/* Buttons */}
+          {/* Label */}
           <div className="buttons-container">
             <h1 className="buttons-label">
               {localState.lang === "en" ? "Thai Layout" : "แป้นพิมพ์ไทย"}
@@ -267,9 +264,10 @@ export default component$(() => {
               {localState.lang === "en" ? "English Layout" : "แป้นพิมพ์อังกฤษ"}
             </h1>
             <h1 className="buttons-label">
-              {localState.lang === "en" ? "Translataion Mode" : "โหมด"}
+              {localState.lang === "en" ? "Translataion Mode" : "โหมดการแปลภาษา"}
             </h1>
-            {/* Thai Keyboard Layout */}
+
+            {/* Thai Keyboard Layout Buttons */}
             <div className="buttons-group">
               {Object.keys(layout.thai).map((layout) => {
                 return (
@@ -289,7 +287,7 @@ export default component$(() => {
               })}
             </div>
 
-            {/* English Keyboard Layout */}
+            {/* English Keyboard Layout Buttons */}
             <div className="buttons-group">
               {Object.keys(layout.eng).map((layout) => {
                 return (
@@ -309,7 +307,7 @@ export default component$(() => {
               })}
             </div>
 
-            {/* Translation Mode */}
+            {/* Translation Mode Buttons */}
             <div className="buttons-group">
               {modes.map((mode) => {
                 return (
@@ -327,6 +325,8 @@ export default component$(() => {
               })}
             </div>
           </div>
+
+          {/* Support button */}
           <div className="absolute left-0 bottom-0 m-4">
             <button
               className="text-white text-[16px] rounded-[100px] px-4 py-2 kofi bg-[#794bc4]"
@@ -338,6 +338,8 @@ export default component$(() => {
             </button>
           </div>
         </div>
+
+        {/* Footer */}
         <div className="absolute bottom-2 left-[1/2] translate-x-[1/2]">
           <button onClick$={() => window.open("https://prolanger.wrong-lang.click/#/wrongLang")}>Visit <span className="underline">SOLID VERSION</span></button>
         </div>

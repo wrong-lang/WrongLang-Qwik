@@ -38,6 +38,10 @@ button {
   @apply flex flex-col gap-6 items-center justify-center w-full;
 }
 
+.header-container {
+  @apply flex flex-col gap-2;
+}
+
 .title-container {
   @apply flex flex-row items-end justify-center animate-bounce;
 }
