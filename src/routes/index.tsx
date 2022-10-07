@@ -158,6 +158,57 @@ export default component$(() => {
 
   return (
     <main className={`${localState.darkTheme ? "dark" : ""}`}>
+      {/* Top Bar Elements */}
+      <div>
+        <div className="absolute top-2 right-2">
+          <button
+            onClick$={() => (localState.modal = true)}
+            class="emotes"
+          >
+            🤔คืออะไร
+          </button>
+        </div>
+        <div className="absolute top-2 left-2">
+          <div className="flex flex-row gap-4">
+            <button
+              onClick$={() =>
+                (localState.darkTheme = !localState.darkTheme)
+              }
+              className="emotes"
+            >
+              {localState.darkTheme ? "😎" : "🌙"}
+            </button>
+            <button
+              onClick$={() =>
+                localState.lang === "en"
+                  ? (localState.lang = "th")
+                  : (localState.lang = "en")
+              }
+              className="emotes"
+            >
+              {localState.lang === "th" ? "🇺🇸" : "🇹🇭"}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className="absolute top-2 left-[1/2] translate-x-[1/2]">
+        <button onClick$={() => window.open("https://tinarskii.com")}>
+          Website of <span className="underline">Tinarskii</span>
+        </button>
+      </div>
+
+      {/* Bottom Bar Elements */}
+      <div className="absolute bottom-4 right-4">
+        <div className="flex flex-row gap-2">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.wrong-lang.click%2F&quote=สำหรับใครที่ชอบลืมเปลี่ยนภาษาเวลาพิมพ์%20ใช้นี่สิ!">
+            <i className="fa-brands fa-facebook text-2xl"></i>
+          </a>
+          <a href="https://twitter.com/intent/tweet/?text=สำหรับใครที่ชอบลืมเปลี่ยนภาษาเวลาพิมพ์%20ใช้นี่สิ!&hashtags=wronglang&via=tinarskii&related=&url=https://www.wrong-lang.click/">
+            <i className="fa-brands fa-twitter text-2xl"></i>
+          </a>
+        </div>
+      </div>
+
       <div className="main-container">
         <div className="page-container">
           {/* Modal */}
@@ -172,57 +223,6 @@ export default component$(() => {
               <span className="title-text">rongLang</span>
             </div>
             <h1 className="text-center text-gray-500">เว็บช่วยแปลงเวลาลืมสลับภาษา</h1>
-          </div>
-
-          {/* Top Bar Elements */}
-          <div>
-            <div className="absolute top-2 right-2">
-              <button
-                onClick$={() => (localState.modal = true)}
-                class="emotes"
-              >
-                🤔คืออะไร
-              </button>
-            </div>
-            <div className="absolute top-2 left-2">
-              <div className="flex flex-row gap-4">
-                <button
-                  onClick$={() =>
-                    (localState.darkTheme = !localState.darkTheme)
-                  }
-                  className="emotes"
-                >
-                  {localState.darkTheme ? "😎" : "🌙"}
-                </button>
-                <button
-                  onClick$={() =>
-                    localState.lang === "en"
-                      ? (localState.lang = "th")
-                      : (localState.lang = "en")
-                  }
-                  className="emotes"
-                >
-                  {localState.lang === "th" ? "🇺🇸" : "🇹🇭"}
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="absolute top-2 left-[1/2] translate-x-[1/2]">
-            <button onClick$={() => window.open("https://tinarskii.com")}>
-              Website of <span className="underline">Tinarskii</span>
-            </button>
-          </div>
-
-          {/* Bottom Bar Elements */}
-          <div className="absolute bottom-4 right-4">
-            <div className="flex flex-row gap-2">
-              <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.wrong-lang.click%2F&quote=สำหรับใครที่ชอบลืมเปลี่ยนภาษาเวลาพิมพ์%20ใช้นี่สิ!">
-                <i className="fa-brands fa-facebook text-2xl"></i>
-              </a>
-              <a href="https://twitter.com/intent/tweet/?text=สำหรับใครที่ชอบลืมเปลี่ยนภาษาเวลาพิมพ์%20ใช้นี่สิ!&hashtags=wronglang&via=tinarskii&related=&url=https://www.wrong-lang.click/">
-                <i className="fa-brands fa-twitter text-2xl"></i>
-              </a>
-            </div>
           </div>
 
           {/* Input Box */}
