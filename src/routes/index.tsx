@@ -197,18 +197,6 @@ export default component$(() => {
         </button>
       </div>
 
-      {/* Bottom Bar Elements */}
-      <div className="absolute bottom-4 right-4">
-        <div className="flex flex-row gap-2">
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.wrong-lang.click%2F&quote=สำหรับใครที่ชอบลืมเปลี่ยนภาษาเวลาพิมพ์%20ใช้นี่สิ!">
-            <i className="fa-brands fa-facebook text-2xl"></i>
-          </a>
-          <a href="https://twitter.com/intent/tweet/?text=สำหรับใครที่ชอบลืมเปลี่ยนภาษาเวลาพิมพ์%20ใช้นี่สิ!&hashtags=wronglang&via=tinarskii&related=&url=https://www.wrong-lang.click/">
-            <i className="fa-brands fa-twitter text-2xl"></i>
-          </a>
-        </div>
-      </div>
-
       <div className="main-container">
         <div className="page-container">
           {/* Modal */}
