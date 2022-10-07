@@ -26,13 +26,13 @@ export const RouterHead = component$(() => {
       <meta property="og:url" content="https://www.wrong-lang.click/"/>
       <meta property="og:title" content="WrongLang - เว็บช่วยแปลงเวลาลืมสลับภาษา"/>
       <meta property="og:description" content="ลืมเปลี่ยนภาษาเวลาพิมพ์แชทงั้นหรอ? เว็บไซต์นี้สามารถช่วยคุณได้ ไม่ว่าจะใช้แป้นเกษมณี, มนูญชัย, Dvorak, Colemak, Qwerty ฯลฯ ก็สามารถใช้ได้!"/>
-      <meta property="og:image" content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png"/>
+      <meta property="og:image" content="https://raw.githubusercontent.com/wrong-lang/WrongLang-Solid/main/public/banner.png"/>
 
       <meta property="twitter:card" content="summary_large_image"/>
       <meta property="twitter:url" content="https://www.wrong-lang.click/"/>
       <meta property="twitter:title" content="WrongLang - เว็บช่วยแปลงเวลาลืมสลับภาษา"/>
       <meta property="twitter:description" content="ลืมเปลี่ยนภาษาเวลาพิมพ์แชทงั้นหรอ? เว็บไซต์นี้สามารถช่วยคุณได้ ไม่ว่าจะใช้แป้นเกษมณี, มนูญชัย, Dvorak, Colemak, Qwerty ฯลฯ ก็สามารถใช้ได้!"/>
-      <meta property="twitter:image" content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png"/>
+      <meta property="twitter:image" content="https://raw.githubusercontent.com/wrong-lang/WrongLang-Solid/main/public/banner.png"/>
 
       {head.meta.map((m) => (
         <meta {...m} />
