@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Kanit:ital@1&family=Sarabun&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital@1&family=Sarabun&family=Noto+Color+Emoji&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital@1&family=Sarabun&family=Noto+Color+Emoji&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -25,8 +26,12 @@ button {
   font-family: "Sarabun", sans-serif;
 }
 
+.emotes {
+  font-family: "Noto Color Emoji", "Sarabun" , sans-serif;
+}
+
 .main-container {
-  @apply grid h-screen place-items-center dark:bg-black;
+  @apply grid min-h-screen py-16 place-items-center bg-gradient-to-bl from-yellow-200 via-green-200 to-blue-200 dark:from-violet-900 dark:to-black;
 }
 
 .page-container {

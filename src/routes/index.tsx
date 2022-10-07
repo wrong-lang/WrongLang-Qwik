@@ -23,6 +23,7 @@ export default component$(() => {
       modal: false,
       darkTheme: false,
       lang: "th",
+      isLoaded: false,
     },
     { recursive: true }
   );
@@ -43,13 +44,14 @@ export default component$(() => {
   };
 
   useClientEffect$(async () => {
-    if (localStorage["wrong-lang-settings"]) {
-      let pJSON = JSON.parse(localStorage["wrong-lang-settings"]);
-      localState.layout = pJSON.layout;
-      localState.darkTheme = pJSON.darkTheme;
-      localState.mode = pJSON.mode;
-      localState.modal = pJSON.modal;
-      localState.lang = pJSON.lang;
+    if (localStorage["wrong-lang-settings"] && !localState.isLoaded) {
+      let parseStore = JSON.parse(localStorage["wrong-lang-settings"]);
+      localState.layout = parseStore.layout;
+      localState.darkTheme = parseStore.darkTheme;
+      localState.mode = parseStore.mode;
+      localState.modal = parseStore.modal;
+      localState.lang = parseStore.lang;
+      localState.isLoaded = true;
     }
   });
 
@@ -107,7 +109,7 @@ export default component$(() => {
       track(localState, "lang");
 
       if (!isServer) {
-        if (localStorage) {
+        if (localStorage && localState.isLoaded) {
           localStorage["wrong-lang-settings"] = JSON.stringify(localState);
         }
       }
@@ -209,8 +211,9 @@ export default component$(() => {
                       ? (localState.lang = "th")
                       : (localState.lang = "en")
                   }
+                  class="emotes"
                 >
-                  {localState.lang === "en" ? "🇺🇸" : "🇹🇭"}
+                  {localState.lang === "en" ? "🇺🇸 (English)" : "🇹🇭 (ภาษาไทย)"}
                 </button>
               </div>
             </div>
@@ -250,6 +253,9 @@ export default component$(() => {
               placeholder={"ข้อความที่แปลงแล้วจะปรากฎ..."}
               value={store.convertedText}
             />
+            <input type="button"
+                   className="w-full p-2 bg-transparent rounded-lg text-blue-500 border-2 border-blue-500 active:bg-blue-500 active:text-white duration-200"
+                   value="คัดลอก" />
           </div>
 
           {/* Buttons */}
@@ -261,7 +267,7 @@ export default component$(() => {
               {localState.lang === "en" ? "English Layout" : "แป้นพิมพ์อังกฤษ"}
             </h1>
             <h1 className="buttons-label">
-              {localState.lang === "en" ? "Mode" : "โหมด"}
+              {localState.lang === "en" ? "Translataion Mode" : "โหมด"}
             </h1>
             {/* Thai Keyboard Layout */}
             <div className="buttons-group">
@@ -331,6 +337,9 @@ export default component$(() => {
               ☕{localState.lang === "th" ? "สนับสนุน" : "Support Me"}
             </button>
           </div>
+        </div>
+        <div className="absolute bottom-2 left-[1/2] translate-x-[1/2]">
+          <button onClick$={() => window.open("https://www.wrong-lang.click/#/wrongLang")}>Visit <span className="underline">SOLID VERSION</span></button>
         </div>
       </div>
     </main>
