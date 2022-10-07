@@ -339,7 +339,7 @@ export default component$(() => {
           </div>
         </div>
         <div className="absolute bottom-2 left-[1/2] translate-x-[1/2]">
-          <button onClick$={() => window.open("https://www.wrong-lang.click/#/wrongLang")}>Visit <span className="underline">SOLID VERSION</span></button>
+          <button onClick$={() => window.open("https://prolanger.wrong-lang.click/#/wrongLang")}>Visit <span className="underline">SOLID VERSION</span></button>
         </div>
       </div>
     </main>
