@@ -191,14 +191,15 @@ export default component$(() => {
           </div>
         </div>
       </div>
-      <div className="absolute top-2 left-[1/2] translate-x-[1/2]">
-        <button onClick$={() => window.open("https://tinarskii.com")}>
-          Website of <span className="underline">Tinarskii</span>
-        </button>
-      </div>
 
       <div className="main-container">
         <div className="page-container">
+          {/* Wordmark */}
+          <div className="absolute top-2 left-[1/2] translate-x-[1/2]">
+            <button onClick$={() => window.open("https://tinarskii.com")}>
+              Website of <span className="underline">Tinarskii</span>
+            </button>
+          </div>
           {/* Modal */}
           {localState.modal && (
             <Modal onClose={() => (localState.modal = false)} />
