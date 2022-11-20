@@ -34,7 +34,12 @@ export const RouterHead = component$(() => {
       <meta property="twitter:description" content="ลืมเปลี่ยนภาษาเวลาพิมพ์แชทงั้นหรอ? เว็บไซต์นี้สามารถช่วยคุณได้ ไม่ว่าจะใช้แป้นเกษมณี, มนูญชัย, Dvorak, Colemak, Qwerty ฯลฯ ก็สามารถใช้ได้!"/>
       <meta property="twitter:image" content="https://raw.githubusercontent.com/wrong-lang/WrongLang-Solid/main/public/banner.png"/>
 
-      {head.meta.map((m) => (
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Noto+Emoji&family=Sarabun&display=swap"
+            rel="stylesheet" />
+
+          {head.meta.map((m) => (
         <meta {...m} />
       ))}
 

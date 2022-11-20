@@ -140,14 +140,20 @@ export default component$(() => {
           .split("")
           .map((char) => {
             return (
-              layout.thai[localState.layout.thai as keyof typeof layout.thai].shift[
-                layout.thai[localState.layout.thai as keyof typeof layout.thai].normal.indexOf(char)
-                ] ||
-              layout.thai[localState.layout.thai as keyof typeof layout.thai].normal[
-                layout.thai[localState.layout.thai as keyof typeof layout.thai].shift.indexOf(char)
-                ] ||
-              /[A-Z]/.test(char) ? char.toLowerCase() : char.toUpperCase()
-                || char
+              layout.thai[localState.layout.thai as keyof typeof layout.thai].shift.concat(
+                layout.thai[localState.layout.thai as keyof typeof layout.thai].normal
+              )[
+                layout.thai[localState.layout.thai as keyof typeof layout.thai].normal.concat(
+                  layout.thai[localState.layout.thai as keyof typeof layout.thai].shift
+                ).indexOf(char)
+              ] ||
+              layout.eng[localState.layout.eng as keyof typeof layout.eng].shift.concat(
+                layout.eng[localState.layout.eng as keyof typeof layout.eng].normal
+              )[
+                layout.eng[localState.layout.eng as keyof typeof layout.eng].normal.concat(
+                  layout.eng[localState.layout.eng as keyof typeof layout.eng].shift
+                ).indexOf(char)
+              ] || char
             );
           })
           .join("");
