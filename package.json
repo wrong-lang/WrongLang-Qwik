@@ -40,6 +40,7 @@
     "wrangler": "beta"
   },
   "dependencies": {
-    "@netlify/vite-plugin-netlify-edge": "^1.1.0"
+    "@netlify/vite-plugin-netlify-edge": "^1.1.0",
+    "wl.js": "1.1.0"
   }
 }
