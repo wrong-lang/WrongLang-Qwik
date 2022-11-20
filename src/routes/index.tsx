@@ -7,10 +7,8 @@ import {
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { isServer } from "@builder.io/qwik/build";
 import { Modal } from "~/components/modal";
-import { WrongLang } from "wl.js";
 
 export default component$(() => {
-  const wrongLang = new WrongLang({});
   // Local Storage store
   let localState = useStore(
     {
@@ -23,6 +21,41 @@ export default component$(() => {
       darkTheme: false,
       lang: "th",
       isLoaded: false,
+    },
+    { recursive: true }
+  );
+
+  const thLayoutName = {
+    Kedmanee: "เกษมณี",
+    Pattachotee: "ปัตตะโชติ",
+    Manoonchai: "มนูญชัย",
+    Qwerty: "เควอร์ตี",
+    Dvorak: "ดีโวแร็ค",
+    Colemak: "โคล์เม็ค",
+  };
+
+  const thMode = {
+    "Swap language": "สลับภาษา",
+    Unshift: "ยกเลิกตรึงอักษร",
+  };
+
+  useClientEffect$(async () => {
+    if (localStorage["wrong-lang-settings"] && !localState.isLoaded) {
+      let parseStore = JSON.parse(localStorage["wrong-lang-settings"]);
+      localState.layout = parseStore.layout;
+      localState.darkTheme = parseStore.darkTheme;
+      localState.mode = parseStore.mode;
+      localState.modal = parseStore.modal;
+      localState.lang = parseStore.lang;
+      localState.isLoaded = true;
+    }
+  });
+
+  // Store text
+  const store = useStore(
+    {
+      text: "",
+      convertedText: "",
     },
     { recursive: true }
   );
@@ -61,41 +94,6 @@ export default component$(() => {
     },
   };
 
-  const thLayoutName = {
-    Kedmanee: "เกษมณี",
-    Pattachotee: "ปัตตะโชติ",
-    Manoonchai: "มนูญชัย",
-    Qwerty: "เควอร์ตี",
-    Dvorak: "ดีโวแร็ค",
-    Colemak: "โคล์เม็ค",
-  };
-
-  const thMode = {
-    "Swap language": "สลับภาษา",
-    Unshift: "ยกเลิกตรึงอักษร",
-  };
-
-  useClientEffect$(async () => {
-    if (localStorage["wrong-lang-settings"] && !localState.isLoaded) {
-      let parseStore = JSON.parse(localStorage["wrong-lang-settings"]);
-      localState.layout = parseStore.layout;
-      localState.darkTheme = parseStore.darkTheme;
-      localState.mode = parseStore.mode;
-      localState.modal = parseStore.modal;
-      localState.lang = parseStore.lang;
-      localState.isLoaded = true;
-    }
-  });
-
-  // Store text
-  const store = useStore(
-    {
-      text: "",
-      convertedText: "",
-    },
-    { recursive: true }
-  );
-
   // Available modes
   const modes = ["Swap language", "Unshift"];
 
@@ -114,20 +112,45 @@ export default component$(() => {
       }
 
       if (localState.mode === "Swap language") {
-        store.convertedText = wrongLang.languageSwap({
-          layout: {
-            from: localState.layout.eng,
-            to: localState.layout.thai,
-          },
-          text: store.text,
-        })
+        store.convertedText = store.text
+          .split("")
+          .map((char) => {
+            return (
+              layout.thai[localState.layout.thai as keyof typeof layout.thai].shift.concat(
+                layout.thai[localState.layout.thai as keyof typeof layout.thai].normal
+              )[
+                layout.eng[localState.layout.eng as keyof typeof layout.eng].shift
+                  .concat(layout.eng[localState.layout.eng as keyof typeof layout.eng].normal)
+                  .indexOf(char)
+                ] ||
+              layout.eng[localState.layout.eng as keyof typeof layout.eng].shift.concat(
+                layout.eng[localState.layout.eng as keyof typeof layout.eng].normal
+              )[
+                layout.thai[localState.layout.thai as keyof typeof layout.thai].shift
+                  .concat(layout.thai[localState.layout.thai as keyof typeof layout.thai].normal)
+                  .indexOf(char)
+                ] || char
+            );
+          })
+          .join("");
       }
 
       if (localState.mode === "Unshift") {
-        store.convertedText = wrongLang.unshift({
-          layout: localState.layout.thai,
-          text: store.text,
-        });
+        store.convertedText = store.text
+          .split("")
+          .map((char) => {
+            return (
+              layout.thai[localState.layout.thai as keyof typeof layout.thai].shift[
+                layout.thai[localState.layout.thai as keyof typeof layout.thai].normal.indexOf(char)
+                ] ||
+              layout.thai[localState.layout.thai as keyof typeof layout.thai].normal[
+                layout.thai[localState.layout.thai as keyof typeof layout.thai].shift.indexOf(char)
+                ] ||
+              /[A-Z]/.test(char) ? char.toLowerCase() : char.toUpperCase()
+                || char
+            );
+          })
+          .join("");
       }
     },
     { eagerness: "load" }
@@ -297,7 +320,7 @@ export default component$(() => {
             <button
               className="text-white text-[16px] rounded-[100px] px-4 py-2 kofi bg-[#794bc4]"
               onClick$={() =>
-                window.open("https://ko-fi.com/tinarskii")
+                window.open("https://github.com/sponsors/tinarskii")
               }
             >
               ☕{localState.lang === "th" ? "สนับสนุน" : "Support Me"}

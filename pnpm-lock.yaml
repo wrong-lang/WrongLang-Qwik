@@ -18,12 +18,12 @@ specifiers:
   typescript: 4.8.3
   vite: 3.1.1
   vite-tsconfig-paths: 3.5.0
-  wl.js: 1.1.0
+  wl.js: 1.1.1
   wrangler: beta
 
 dependencies:
   '@netlify/vite-plugin-netlify-edge': 1.1.0
-  wl.js: 1.1.0
+  wl.js: 1.1.1
 
 devDependencies:
   '@builder.io/qwik': 0.9.0
@@ -3296,8 +3296,8 @@ packages:
       isexe: 2.0.0
     dev: true
 
-  /wl.js/1.1.0:
-    resolution: {integrity: sha512-scdj5N0dy39yzcAy8fD6ezgM4jXx4ExUBxSyPoqvw4hjoqm/VN0Bpjf+lSzQaHuookgKVDKIRqOXKQ0MRRCPdA==}
+  /wl.js/1.1.1:
+    resolution: {integrity: sha512-5Y5z/lR+Hv9PSm9KRMcst+pW7Lthm1yssAyk58L39fXRo2HyuI4f9Ll477bwcKEJ4d0Sggr7x4hJtrK0HvpceA==}
     dependencies:
       '@types/node': 18.11.9
       ts-node: 10.9.1_wup25etrarvlqkprac7h35hj7u
