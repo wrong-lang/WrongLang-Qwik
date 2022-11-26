@@ -41,6 +41,6 @@
   },
   "dependencies": {
     "@netlify/vite-plugin-netlify-edge": "^1.1.0",
-    "wl.js": "1.1.1"
+    "wl.js": "1.1.4"
   }
 }

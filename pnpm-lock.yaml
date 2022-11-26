@@ -18,12 +18,12 @@ specifiers:
   typescript: 4.8.3
   vite: 3.1.1
   vite-tsconfig-paths: 3.5.0
-  wl.js: 1.1.1
+  wl.js: 1.1.4
   wrangler: beta
 
 dependencies:
   '@netlify/vite-plugin-netlify-edge': 1.1.0
-  wl.js: 1.1.1
+  wl.js: 1.1.4
 
 devDependencies:
   '@builder.io/qwik': 0.9.0
@@ -42,7 +42,7 @@ devDependencies:
   typescript: 4.8.3
   vite: 3.1.1
   vite-tsconfig-paths: 3.5.0_vite@3.1.1
-  wrangler: 0.0.0-ef24dbab
+  wrangler: 0.0.0-60d31c01
 
 packages:
 
@@ -3296,8 +3296,8 @@ packages:
       isexe: 2.0.0
     dev: true
 
-  /wl.js/1.1.1:
-    resolution: {integrity: sha512-5Y5z/lR+Hv9PSm9KRMcst+pW7Lthm1yssAyk58L39fXRo2HyuI4f9Ll477bwcKEJ4d0Sggr7x4hJtrK0HvpceA==}
+  /wl.js/1.1.4:
+    resolution: {integrity: sha512-aGTupWWbjM8/o4v0G46061X9DInGAOYqXcCjpIDoMNcPRb9Xb6Lah9IMJ6J+YD901jNK4JMDwGBMZXaFPv1fTg==}
     dependencies:
       '@types/node': 18.11.9
       ts-node: 10.9.1_wup25etrarvlqkprac7h35hj7u
@@ -3312,8 +3312,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /wrangler/0.0.0-ef24dbab:
-    resolution: {integrity: sha512-I8AAVXJsJLKrqVBnkPY0LqqfKe0UZiwMXkc73Gb1hzydA/mzMJj2Q4xPanDfwq0XQRTjXXUccg657UbIILAXnA==}
+  /wrangler/0.0.0-60d31c01:
+    resolution: {integrity: sha512-C0mlL7hrC4tt3ue4qYslDj9tYjhtHc4VrK7FV8OH7deIBLe0/4gYEE4a0NiHgkt75Y+/JUPrUgI1f/NaP0HAhQ==}
     engines: {node: '>=16.13.0'}
     hasBin: true
     dependencies:

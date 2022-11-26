@@ -37,7 +37,11 @@ export const RouterHead = component$(() => {
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Noto+Emoji&family=Sarabun&display=swap"
-            rel="stylesheet" />
+            rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Noto+Emoji&family=Sarabun&display=swap"
+              rel="stylesheet" />
+      </noscript>
 
           {head.meta.map((m) => (
         <meta {...m} />
